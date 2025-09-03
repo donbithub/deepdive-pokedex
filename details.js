@@ -220,7 +220,7 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
 
         const evoRowContainer = CreateElement(
           "div",
-          "h-full flex justify-around pb-4 card-background rounded-b-[1rem]",
+          "h-full pl-2 pr-2 flex justify-around pb-4 card-background rounded-b-[1rem]",
           null,
           evoContainer
         );
