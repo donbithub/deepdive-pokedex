@@ -1,152 +1,205 @@
 <!DOCTYPE html>
 <html lang="nl">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Pokemon Index</title>
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="indexstyle.css">
-</head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="indexstyle.css" />
+  </head>
 
-<body class="bg-light">
-
+  <body class="bg-light">
     <!-- Hero -->
     <section class="hero text-white text-center py-5 mb-4 d-flex">
-        <div class="container d-flex flex-column justify-content-center align-items-center">
-            <h1 class="display-4 fw-bold mb-3 bg-dark bg-opacity-50 px-3 py-2 rounded">Pokemon Wereld</h1>
-            <p class="lead mb-4 bg-dark bg-opacity-50 px-3 py-2 rounded">
-                Zoek je favoriete Pokemon, bekijk alle kaarten met “Laad meer”, klik voor details, of laat er twee
-                vechten!
-            </p>
+      <div
+        class="container d-flex flex-column justify-content-center align-items-center"
+      >
+        <h1
+          class="display-4 fw-bold mb-3 bg-dark bg-opacity-50 px-3 py-2 rounded"
+        >
+          Pokemon Wereld
+        </h1>
+        <p class="lead mb-4 bg-dark bg-opacity-50 px-3 py-2 rounded">
+          Zoek je favoriete Pokemon, bekijk alle kaarten met “Laad meer”, klik
+          voor details, of laat er twee vechten!
+        </p>
 
-            <!-- Zoek -->
-            <div class="row justify-content-center w-100">
-                <div class="col-lg-7">
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-text">🔎</span>
-                        <input type="text" id="pokemonName" class="form-control" placeholder="Bijv. pikachu of #25">
-                        <button class="btn btn-danger" id="btnSearch">Zoek</button>
-                    </div>
-                    <div class="mt-2 small text-start">
-                        <span id="existsIndicator" class="exists-indicator d-none"></span>
-                        <span id="existsText" class="ms-1 text-muted"></span>
-                    </div>
-                </div>
+        <!-- Zoek -->
+        <div class="row justify-content-center w-100">
+          <div class="col-lg-7">
+            <div class="input-group input-group-lg">
+              <span class="input-group-text">🔎</span>
+              <input
+                type="text"
+                id="pokemonName"
+                class="form-control"
+                placeholder="Bijv. pikachu of #25"
+              />
+              <button class="btn btn-danger" id="btnSearch">Zoek</button>
             </div>
+            <div class="mt-2 small text-start">
+              <span id="existsIndicator" class="exists-indicator d-none"></span>
+              <span id="existsText" class="ms-1 text-muted"></span>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Zoekresultaat -->
     <div class="container mb-5">
-        <div id="search-result" class="row g-4 justify-content-center"></div>
+      <div id="search-result" class="row g-4 justify-content-center"></div>
     </div>
 
     <!-- Battle Arena -->
     <div class="container mb-5">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2 class="fw-bold">⚔️ Battle Arena</h2>
-            <div>
-                <button class="btn btn-outline-secondary me-2" id="btnResetBattle">Reset</button>
-                <button class="btn btn-outline-primary me-2" id="btnNextTurn">Volgende beurt</button>
-                <button class="btn btn-primary" id="btnAutoFight">Auto fight</button>
-            </div>
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="fw-bold">⚔️ Battle Arena</h2>
+        <div>
+          <button class="btn btn-outline-secondary me-2" id="btnResetBattle">
+            Reset
+          </button>
+          <button class="btn btn-outline-primary me-2" id="btnNextTurn">
+            Volgende beurt
+          </button>
+          <button class="btn btn-primary" id="btnAutoFight">Auto fight</button>
         </div>
+      </div>
 
-        <div class="row g-4 align-items-stretch">
-            <div class="col-md-5">
-                <div class="card h-100 fighter-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Fighter A</h5>
-                        <div class="d-flex align-items-center mb-3">
-                            <input class="form-control me-2" id="fighterAInput" placeholder="Naam of ID">
-                            <button class="btn btn-outline-danger" id="btnPickA">Kies</button>
-                        </div>
-                        <div id="fighterAView" class="text-center text-muted">Geen Pokemon gekozen</div>
-                    </div>
-                </div>
+      <div class="row g-4 align-items-stretch">
+        <div class="col-md-5">
+          <div class="card h-100 fighter-card">
+            <div class="card-body">
+              <h5 class="card-title">Fighter A</h5>
+              <div class="d-flex align-items-center mb-3">
+                <input
+                  class="form-control me-2"
+                  id="fighterAInput"
+                  placeholder="Naam of ID"
+                />
+                <button class="btn btn-outline-danger" id="btnPickA">
+                  Kies
+                </button>
+              </div>
+              <div id="fighterAView" class="text-center text-muted">
+                Geen Pokemon gekozen
+              </div>
             </div>
-            <div class="col-md-2 d-none d-md-flex align-items-center justify-content-center">
-                <span class="display-6">vs</span>
-            </div>
-            <div class="col-md-5">
-                <div class="card h-100 fighter-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Fighter B</h5>
-                        <div class="d-flex align-items-center mb-3">
-                            <input class="form-control me-2" id="fighterBInput" placeholder="Naam of ID">
-                            <button class="btn btn-outline-danger" id="btnPickB">Kies</button>
-                        </div>
-                        <div id="fighterBView" class="text-center text-muted">Geen Pokemon gekozen</div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+        <div
+          class="col-md-2 d-none d-md-flex align-items-center justify-content-center"
+        >
+          <span class="display-6">vs</span>
+        </div>
+        <div class="col-md-5">
+          <div class="card h-100 fighter-card">
+            <div class="card-body">
+              <h5 class="card-title">Fighter B</h5>
+              <div class="d-flex align-items-center mb-3">
+                <input
+                  class="form-control me-2"
+                  id="fighterBInput"
+                  placeholder="Naam of ID"
+                />
+                <button class="btn btn-outline-danger" id="btnPickB">
+                  Kies
+                </button>
+              </div>
+              <div id="fighterBView" class="text-center text-muted">
+                Geen Pokemon gekozen
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        <div class="mt-3">
-            <div class="log-box" id="battleLog"></div>
-            <div class="small text-muted mt-2">
-                *Schade is random per beurt en beetje gebaseerd op Attack/Defense/Speed stats.
-            </div>
+      <div class="mt-3">
+        <div class="log-box" id="battleLog"></div>
+        <div class="small text-muted mt-2">
+          *Schade is random per beurt en beetje gebaseerd op
+          Attack/Defense/Speed stats.
         </div>
+      </div>
     </div>
 
     <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2 class="fw-bold">🗂️ Alle Pokemon kaarten</h2>
-            <button class="btn btn-outline-danger" id="btnLoadMore">Laad meer</button>
-        </div>
-        <div id="pokemon-container" class="row g-4"></div>
-        <div class="text-center my-4">
-            <button class="btn btn-outline-danger" id="btnLoadMoreBottom">Laad meer</button>
-        </div>
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="fw-bold">🗂️ Alle Pokemon kaarten</h2>
+        <button class="btn btn-outline-danger" id="btnLoadMore">
+          Laad meer
+        </button>
+      </div>
+      <div id="pokemon-container" class="row g-4"></div>
+      <div class="text-center my-4">
+        <button class="btn btn-outline-danger" id="btnLoadMoreBottom">
+          Laad meer
+        </button>
+      </div>
     </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        const API = 'https://pokeapi.co/api/v2';
-        const cache = new Map(); // name/id -> pokemon data
-        let listNextUrl = `${API}/pokemon?limit=24`;
-        let autoTimer = null;
+      const API = "https://pokeapi.co/api/v2";
+      const cache = new Map(); // name/id -> pokemon data
+      let listNextUrl = `${API}/pokemon?limit=24`;
+      let autoTimer = null;
 
-        const typeColors = {
-            normal: '#A8A77A', fire: '#EE8130', water: '#6390F0', electric: '#F7D02C', grass: '#7AC74C',
-            ice: '#96D9D6', fighting: '#C22E28', poison: '#A33EA1', ground: '#E2BF65', flying: '#A98FF3',
-            psychic: '#F95587', bug: '#A6B91A', rock: '#B6A136', ghost: '#735797', dragon: '#6F35FC',
-            dark: '#705746', steel: '#B7B7CE', fairy: '#D685AD'
-        };
+      const typeColors = {
+        normal: "#A8A77A",
+        fire: "#EE8130",
+        water: "#6390F0",
+        electric: "#F7D02C",
+        grass: "#7AC74C",
+        ice: "#96D9D6",
+        fighting: "#C22E28",
+        poison: "#A33EA1",
+        ground: "#E2BF65",
+        flying: "#A98FF3",
+        psychic: "#F95587",
+        bug: "#A6B91A",
+        rock: "#B6A136",
+        ghost: "#735797",
+        dragon: "#6F35FC",
+        dark: "#705746",
+        steel: "#B7B7CE",
+        fairy: "#D685AD",
+      };
 
-        const $ = sel => document.querySelector(sel);
-        const $$ = sel => document.querySelectorAll(sel);
+      const $ = (sel) => document.querySelector(sel);
+      const $$ = (sel) => document.querySelectorAll(sel);
 
-        function cap(s) {
-            return s.charAt(0).toUpperCase() + s.slice(1);
-        }
+      function cap(s) {
+        return s.charAt(0).toUpperCase() + s.slice(1);
+      }
 
-        async function getPokemon(identifier) {
-            const key = String(identifier).toLowerCase().replace('#', '');
-            if (cache.has(key)) return cache.get(key);
-            const res = await fetch(`${API}/pokemon/${key}`);
-            if (!res.ok) throw new Error('Pokemon niet gevonden!');
-            const data = await res.json();
-            cache.set(key, data);
-            cache.set(String(data.id), data);
-            cache.set(data.name, data);
-            return data;
-        }
+      async function getPokemon(identifier) {
+        const key = String(identifier).toLowerCase().replace("#", "");
+        if (cache.has(key)) return cache.get(key);
+        const res = await fetch(`${API}/pokemon/${key}`);
+        if (!res.ok) throw new Error("Pokemon niet gevonden!");
+        const data = await res.json();
+        cache.set(key, data);
+        cache.set(String(data.id), data);
+        cache.set(data.name, data);
+        return data;
+      }
 
-        function typeBadge(t) {
-            const c = typeColors[t] || '#999'; // default: #999
-            return `<span class="badge type-badge" style="background:${c}">${t}</span>`;
-        }
+      function typeBadge(t) {
+        const c = typeColors[t] || "#999"; // default: #999
+        return `<span class="badge type-badge" style="background:${c}">${t}</span>`;
+      }
 
-        function statRow(label, value, max = 200, cls = '') {
-            const pct = Math.min(100, Math.round((value / max) * 100));
-            return `
+      function statRow(label, value, max = 200, cls = "") {
+        const pct = Math.min(100, Math.round((value / max) * 100));
+        return `
         <div class="mb-2">
           <div class="d-flex justify-content-between">
             <span>${label}</span><span class="text-muted">${value}</span>
@@ -154,12 +207,15 @@
           <div class="stat-bar ${cls}" style="width:${pct}%"></div>
         </div>
       `;
-        }
+      }
 
-        function cardHTML(data) {
-            const types = data.types.map(t => typeBadge(t.type.name)).join(' ');
-            const img = data.sprites.other?.['official-artwork']?.front_default || data.sprites.front_default || '';
-            return `
+      function cardHTML(data) {
+        const types = data.types.map((t) => typeBadge(t.type.name)).join(" ");
+        const img =
+          data.sprites.other?.["official-artwork"]?.front_default ||
+          data.sprites.front_default ||
+          "";
+        return `
         <div class="col-6 col-sm-4 col-md-3 col-lg-2">
           <div class="card shadow-sm h-100 text-center">
             <img src="${img}" class="card-img-top p-2" alt="${data.name}">
@@ -178,174 +234,219 @@
           </div>
         </div>
       `;
+      }
+
+      // Zoekfunctie
+
+      const pokemonNameInput = $("#pokemonName");
+      const btnSearch = $("#btnSearch");
+      const existsIndicator = $("#existsIndicator");
+      const existsText = $("#existsText");
+      const searchResult = $("#search-result");
+
+      let debounceT;
+      pokemonNameInput.addEventListener("input", () => {
+        clearTimeout(debounceT);
+        const val = pokemonNameInput.value.trim();
+        if (!val) {
+          existsIndicator.classList.add("d-none");
+          existsText.textContent = "";
+          return;
         }
+        debounceT = setTimeout(async () => {
+          try {
+            await getPokemon(val.toLowerCase());
+            existsIndicator.className = "exists-indicator exists-yes";
+            existsText.textContent = "Bestaat ✅";
+          } catch {
+            existsIndicator.className = "exists-indicator exists-no";
+            existsText.textContent = "Niet gevonden ❌";
+          }
+          existsIndicator.classList.remove("d-none");
+        }, 400);
+      });
 
-        // Zoekfunctie
+      btnSearch.addEventListener("click", searchPokemon);
+      pokemonNameInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") searchPokemon();
+      });
 
-        const pokemonNameInput = $('#pokemonName');
-        const btnSearch = $('#btnSearch');
-        const existsIndicator = $('#existsIndicator');
-        const existsText = $('#existsText');
-        const searchResult = $('#search-result');
+      async function searchPokemon() {
+        const name = pokemonNameInput.value.trim().toLowerCase();
+        searchResult.innerHTML = "";
+        if (!name) {
+          searchResult.innerHTML = `<div class="col-12 text-center text-danger">⚠️ Vul een naam of ID in!</div>`;
+          return;
+        }
+        try {
+          const data = await getPokemon(name);
+          searchResult.innerHTML = cardHTML(data);
+        } catch (e) {
+          searchResult.innerHTML = `<div class="col-12 text-center text-danger">${e.message}</div>`;
+        }
+      }
 
-        let debounceT;
-        pokemonNameInput.addEventListener('input', () => {
-            clearTimeout(debounceT);
-            const val = pokemonNameInput.value.trim();
-            if (!val) { existsIndicator.classList.add('d-none'); existsText.textContent = ''; return; }
-            debounceT = setTimeout(async () => {
-                try {
-                    await getPokemon(val.toLowerCase());
-                    existsIndicator.className = 'exists-indicator exists-yes';
-                    existsText.textContent = 'Bestaat ✅';
-                } catch {
-                    existsIndicator.className = 'exists-indicator exists-no';
-                    existsText.textContent = 'Niet gevonden ❌';
-                }
-                existsIndicator.classList.remove('d-none');
-            }, 400);
+      // Laad meer
+      const listContainer = $("#pokemon-container");
+      const btnLoadMore = $("#btnLoadMore");
+      const btnLoadMoreBottom = $("#btnLoadMoreBottom");
+
+      btnLoadMore.addEventListener("click", loadMore);
+      btnLoadMoreBottom.addEventListener("click", loadMore);
+
+      async function loadMore() {
+        if (!listNextUrl) return;
+        const btns = [btnLoadMore, btnLoadMoreBottom];
+        btns.forEach((b) => {
+          b.disabled = true;
+          b.textContent = "Laden...";
         });
 
-        btnSearch.addEventListener('click', searchPokemon);
-        pokemonNameInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') searchPokemon(); });
+        try {
+          const res = await fetch(listNextUrl);
+          const data = await res.json();
+          listNextUrl = data.next;
 
-        async function searchPokemon() {
-            const name = pokemonNameInput.value.trim().toLowerCase();
-            searchResult.innerHTML = '';
-            if (!name) {
-                searchResult.innerHTML = `<div class="col-12 text-center text-danger">⚠️ Vul een naam of ID in!</div>`;
-                return;
-            }
-            try {
-                const data = await getPokemon(name);
-                searchResult.innerHTML = cardHTML(data);
-            } catch (e) {
-                searchResult.innerHTML = `<div class="col-12 text-center text-danger">${e.message}</div>`;
-            }
+          // Haal details per item op
+          const details = await Promise.all(
+            data.results.map((item) => getPokemon(item.name).catch(() => null))
+          );
+
+          const html = details
+            .filter(Boolean)
+            .map((p) => cardHTML(p))
+            .join("");
+          listContainer.insertAdjacentHTML("beforeend", html);
+
+          // Verberg knoppen als we klaar zijn
+          if (!listNextUrl) {
+            btns.forEach((b) => {
+              b.disabled = true;
+              b.textContent = "Alles geladen ✔️";
+            });
+          } else {
+            btns.forEach((b) => {
+              b.disabled = false;
+              b.textContent = "Laad meer";
+            });
+          }
+        } catch (err) {
+          console.error(err);
+          btns.forEach((b) => {
+            b.disabled = false;
+            b.textContent = "Probeer opnieuw";
+          });
+        }
+      }
+
+      // Eerste lading
+      loadMore();
+
+      // Klikken op kaarten
+      document.addEventListener("click", async (e) => {
+        const btn = e.target.closest("button[data-action]");
+        if (!btn) return;
+
+        const id = btn.getAttribute("data-id");
+        const action = btn.getAttribute("data-action");
+        if (!id) return;
+
+        if (action === "details") {
+          window.location.href = `details.html?id=${id}`;
+          return;
         }
 
-        // Laad meer
-        const listContainer = $('#pokemon-container');
-        const btnLoadMore = $('#btnLoadMore');
-        const btnLoadMoreBottom = $('#btnLoadMoreBottom');
-
-        btnLoadMore.addEventListener('click', loadMore);
-        btnLoadMoreBottom.addEventListener('click', loadMore);
-
-        async function loadMore() {
-            if (!listNextUrl) return;
-            const btns = [btnLoadMore, btnLoadMoreBottom];
-            btns.forEach(b => { b.disabled = true; b.textContent = 'Laden...'; });
-
-            try {
-                const res = await fetch(listNextUrl);
-                const data = await res.json();
-                listNextUrl = data.next;
-
-                // Haal details per item op
-                const details = await Promise.all(
-                    data.results.map(item => getPokemon(item.name).catch(() => null))
-                );
-
-                const html = details.filter(Boolean).map(p => cardHTML(p)).join('');
-                listContainer.insertAdjacentHTML('beforeend', html);
-
-                // Verberg knoppen als we klaar zijn
-                if (!listNextUrl) {
-                    btns.forEach(b => { b.disabled = true; b.textContent = 'Alles geladen ✔️'; });
-                } else {
-                    btns.forEach(b => { b.disabled = false; b.textContent = 'Laad meer'; });
-                }
-            } catch (err) {
-                console.error(err);
-                btns.forEach(b => { b.disabled = false; b.textContent = 'Probeer opnieuw'; });
-            }
+        // Voor battle-knoppen halen we de data op en zetten we de fighter
+        if (action === "battleA") {
+          const poke = await getPokemon(id);
+          setFighter("A", poke);
+          return;
         }
-
-        // Eerste lading
-        loadMore();
-
-        // Klikken op kaarten
-        document.addEventListener('click', async (e) => {
-            const btn = e.target.closest('button[data-action]');
-            if (!btn) return;
-
-            const id = btn.getAttribute('data-id');
-            const action = btn.getAttribute('data-action');
-            if (!id) return;
-
-            if (action === 'details') {
-                window.location.href = `${window.location.pathname}/details/${id}`;
-                return;
-            }
-
-            // Voor battle-knoppen halen we de data op en zetten we de fighter
-            if (action === 'battleA') {
-                const poke = await getPokemon(id);
-                setFighter('A', poke);
-                return;
-            }
-            if (action === 'battleB') {
-                const poke = await getPokemon(id);
-                setFighter('B', poke);
-                return;
-            }
-        });
-
-
-        // Battle Arena
-        const fighterAView = $('#fighterAView');
-        const fighterBView = $('#fighterBView');
-        const battleLog = $('#battleLog');
-
-        const btnPickA = $('#btnPickA');
-        const btnPickB = $('#btnPickB');
-        btnPickA.addEventListener('click', pickFromInputA);
-        btnPickB.addEventListener('click', pickFromInputB);
-
-        async function pickFromInputA() {
-            const val = $('#fighterAInput').value.trim();
-            if (!val) return;
-            try { setFighter('A', await getPokemon(val)); } catch { bericht('Pokemon A niet gevonden'); }
+        if (action === "battleB") {
+          const poke = await getPokemon(id);
+          setFighter("B", poke);
+          return;
         }
-        async function pickFromInputB() {
-            const val = $('#fighterBInput').value.trim();
-            if (!val) return;
-            try { setFighter('B', await getPokemon(val)); } catch { bericht('Pokemon B niet gevonden'); }
-        }
+      });
 
-        const state = {
-            A: null,
-            B: null,
-            inBattle: false,
-            turn: 'A',
+      // Battle Arena
+      const fighterAView = $("#fighterAView");
+      const fighterBView = $("#fighterBView");
+      const battleLog = $("#battleLog");
+
+      const btnPickA = $("#btnPickA");
+      const btnPickB = $("#btnPickB");
+      btnPickA.addEventListener("click", pickFromInputA);
+      btnPickB.addEventListener("click", pickFromInputB);
+
+      async function pickFromInputA() {
+        const val = $("#fighterAInput").value.trim();
+        if (!val) return;
+        try {
+          setFighter("A", await getPokemon(val));
+        } catch {
+          bericht("Pokemon A niet gevonden");
+        }
+      }
+      async function pickFromInputB() {
+        const val = $("#fighterBInput").value.trim();
+        if (!val) return;
+        try {
+          setFighter("B", await getPokemon(val));
+        } catch {
+          bericht("Pokemon B niet gevonden");
+        }
+      }
+
+      const state = {
+        A: null,
+        B: null,
+        inBattle: false,
+        turn: "A",
+      };
+
+      function makeFighter(p) {
+        const stats = Object.fromEntries(
+          p.stats.map((s) => [s.stat.name, s.base_stat])
+        );
+        const maxHP = Math.max(1, stats.hp) * 10; // HP
+        return {
+          id: p.id,
+          name: p.name,
+          img:
+            p.sprites.front_default ||
+            p.sprites.other?.["official-artwork"]?.front_default ||
+            "",
+          types: p.types.map((t) => t.type.name),
+          stats,
+          maxHP,
+          hp: maxHP,
+          attack: stats.attack,
+          defense: stats.defense,
+          speed: stats.speed,
         };
+      }
 
-        function makeFighter(p) {
-            const stats = Object.fromEntries(p.stats.map(s => [s.stat.name, s.base_stat]));
-            const maxHP = Math.max(1, stats.hp) * 10; // HP
-            return {
-                id: p.id, name: p.name, img: p.sprites.front_default || p.sprites.other?.['official-artwork']?.front_default || '',
-                types: p.types.map(t => t.type.name),
-                stats, maxHP, hp: maxHP, attack: stats.attack, defense: stats.defense, speed: stats.speed
-            };
+      function setFighter(side, p) {
+        state[side] = makeFighter(p);
+        renderFighter(side);
+        log(`⚙️ Fighter ${side} ingesteld op ${cap(p.name)} (#${p.id}).`);
+        if (state.A && state.B) {
+          resetBattle(false);
+        }
+      }
+
+      function renderFighter(side) {
+        const f = state[side];
+        const el = side === "A" ? fighterAView : fighterBView;
+        if (!f) {
+          el.innerHTML = '<span class="text-muted">Geen Pokemon gekozen</span>';
+          return;
         }
 
-        function setFighter(side, p) {
-            state[side] = makeFighter(p);
-            renderFighter(side);
-            log(`⚙️ Fighter ${side} ingesteld op ${cap(p.name)} (#${p.id}).`);
-            if (state.A && state.B) { resetBattle(false); }
-        }
-
-        function renderFighter(side) {
-            const f = state[side];
-            const el = side === 'A' ? fighterAView : fighterBView;
-            if (!f) { el.innerHTML = '<span class="text-muted">Geen Pokemon gekozen</span>'; return; }
-
-            const types = f.types.map(t => typeBadge(t)).join(' ');
-            const hpPct = Math.round((f.hp / f.maxHP) * 100);
-            el.innerHTML = `
+        const types = f.types.map((t) => typeBadge(t)).join(" ");
+        const hpPct = Math.round((f.hp / f.maxHP) * 100);
+        el.innerHTML = `
         <div class="d-flex gap-3 align-items-center">
           <img src="${f.img}" alt="${f.name}">
           <div class="flex-grow-1">
@@ -361,116 +462,151 @@
           </div>
         </div>
       `;
+      }
+
+      function resetBattle(showMsg = true) {
+        if (state.A) {
+          state.A.hp = state.A.maxHP;
+          renderFighter("A");
+        }
+        if (state.B) {
+          state.B.hp = state.B.maxHP;
+          renderFighter("B");
+        }
+        state.turn =
+          state.A && state.B
+            ? state.A.speed >= state.B.speed
+              ? "A"
+              : "B"
+            : "A";
+        state.inBattle = false;
+        clearInterval(autoTimer);
+        autoTimer = null;
+        if (showMsg) log("🔄 Battle gereset.");
+      }
+
+      function randomDamage(attacker, defender) {
+        // Random factor + beetje invloed van stats
+        const base = attacker.attack * (0.8 + Math.random() * 0.4); // 80%-120% attack
+        const mitig = defender.defense * 0.3; // verdediging
+        const raw = Math.max(5, Math.round(base - mitig));
+        // Kleine randomizer
+        const jitter = Math.round(raw * (0.85 + Math.random() * 0.3));
+        return Math.max(1, jitter);
+      }
+
+      function takeTurn() {
+        if (!state.A || !state.B) return log("Kies eerst beide fighters.");
+        if (state.inBattle === false) state.inBattle = true;
+
+        const atkSide = state.turn;
+        const defSide = atkSide === "A" ? "B" : "A";
+        const atk = state[atkSide];
+        const def = state[defSide];
+
+        if (atk.hp <= 0 || def.hp <= 0) {
+          endBattle();
+          return;
         }
 
-        function resetBattle(showMsg = true) {
-            if (state.A) { state.A.hp = state.A.maxHP; renderFighter('A'); }
-            if (state.B) { state.B.hp = state.B.maxHP; renderFighter('B'); }
-            state.turn = (state.A && state.B) ? (state.A.speed >= state.B.speed ? 'A' : 'B') : 'A';
-            state.inBattle = false;
-            clearInterval(autoTimer); autoTimer = null;
-            if (showMsg) log('🔄 Battle gereset.');
+        const dmg = randomDamage(atk, def);
+        def.hp = Math.max(0, def.hp - dmg);
+        log(`🎯 ${cap(atk.name)} doet ${dmg} schade aan ${cap(def.name)}.`);
+        renderFighter(defSide);
+
+        if (def.hp <= 0) {
+          log(`🏆 ${cap(atk.name)} wint!`);
+          state.inBattle = false;
+          clearInterval(autoTimer);
+          autoTimer = null;
+          return;
         }
 
-        function randomDamage(attacker, defender) {
-            // Random factor + beetje invloed van stats
-            const base = attacker.attack * (0.8 + Math.random() * 0.4); // 80%-120% attack
-            const mitig = defender.defense * 0.3; // verdediging
-            const raw = Math.max(5, Math.round(base - mitig));
-            // Kleine randomizer
-            const jitter = Math.round(raw * (0.85 + Math.random() * 0.3));
-            return Math.max(1, jitter);
+        state.turn = defSide; // wissel beurt
+      }
+
+      function endBattle() {
+        if (!state.A || !state.B) return;
+        const winner = state.A.hp > 0 ? state.A : state.B;
+        const loser = state.A.hp > 0 ? state.B : state.A;
+        log(
+          `🏆 ${cap(winner.name)} heeft gewonnen! ${cap(
+            loser.name
+          )} viel uit met 0 HP.`
+        );
+        state.inBattle = false;
+        clearInterval(autoTimer);
+        autoTimer = null;
+      }
+
+      function log(msg) {
+        const time = new Date().toLocaleTimeString();
+        battleLog.insertAdjacentHTML(
+          "beforeend",
+          `<div>[${time}] ${msg}</div>`
+        );
+        battleLog.scrollTop = battleLog.scrollHeight;
+      }
+
+      // Buttons
+      $("#btnResetBattle").addEventListener("click", () => resetBattle(true));
+      $("#btnNextTurn").addEventListener("click", takeTurn);
+      $("#btnAutoFight").addEventListener("click", () => {
+        if (!state.A || !state.B) return log("Kies eerst beide fighters.");
+        if (autoTimer) {
+          clearInterval(autoTimer);
+          autoTimer = null;
+          log("⏹️ Auto fight gestopt.");
+          return;
         }
+        log("▶️ Auto fight gestart.");
+        autoTimer = setInterval(() => {
+          if (state.inBattle === false) state.inBattle = true;
+          takeTurn();
+          if (!state.inBattle) {
+            clearInterval(autoTimer);
+            autoTimer = null;
+          }
+        }, 800);
+      });
 
-        function takeTurn() {
-            if (!state.A || !state.B) return log('Kies eerst beide fighters.');
-            if (state.inBattle === false) state.inBattle = true;
-
-            const atkSide = state.turn;
-            const defSide = atkSide === 'A' ? 'B' : 'A';
-            const atk = state[atkSide];
-            const def = state[defSide];
-
-            if (atk.hp <= 0 || def.hp <= 0) { endBattle(); return; }
-
-            const dmg = randomDamage(atk, def);
-            def.hp = Math.max(0, def.hp - dmg);
-            log(`🎯 ${cap(atk.name)} doet ${dmg} schade aan ${cap(def.name)}.`);
-            renderFighter(defSide);
-
-            if (def.hp <= 0) {
-                log(`🏆 ${cap(atk.name)} wint!`);
-                state.inBattle = false;
-                clearInterval(autoTimer); autoTimer = null;
-                return;
-            }
-
-            state.turn = defSide; // wissel beurt
+      // Detail knop naar fighters
+      detailsModalEl.addEventListener("click", async (e) => {
+        const btnA = e.target.closest("#addToBattleA");
+        const btnB = e.target.closest("#addToBattleB");
+        if (btnA && currentDetailPokemon) {
+          setFighter("A", currentDetailPokemon);
         }
-
-        function endBattle() {
-            if (!state.A || !state.B) return;
-            const winner = state.A.hp > 0 ? state.A : state.B;
-            const loser = state.A.hp > 0 ? state.B : state.A;
-            log(`🏆 ${cap(winner.name)} heeft gewonnen! ${cap(loser.name)} viel uit met 0 HP.`);
-            state.inBattle = false;
-            clearInterval(autoTimer); autoTimer = null;
+        if (btnB && currentDetailPokemon) {
+          setFighter("B", currentDetailPokemon);
         }
+      });
 
-        function log(msg) {
-            const time = new Date().toLocaleTimeString();
-            battleLog.insertAdjacentHTML('beforeend', `<div>[${time}] ${msg}</div>`);
-            battleLog.scrollTop = battleLog.scrollHeight;
+      // Berichten
+      function bericht(message) {
+        const id = "bericht";
+        let b = document.getElementById(id);
+        if (!b) {
+          b = document.createElement("div");
+          b.id = id;
+          b.style.position = "fixed";
+          b.style.right = "16px";
+          b.style.bottom = "16px";
+          b.style.zIndex = 1080;
+          document.body.appendChild(t);
         }
-
-        // Buttons
-        $('#btnResetBattle').addEventListener('click', () => resetBattle(true));
-        $('#btnNextTurn').addEventListener('click', takeTurn);
-        $('#btnAutoFight').addEventListener('click', () => {
-            if (!state.A || !state.B) return log('Kies eerst beide fighters.');
-            if (autoTimer) { clearInterval(autoTimer); autoTimer = null; log('⏹️ Auto fight gestopt.'); return; }
-            log('▶️ Auto fight gestart.');
-            autoTimer = setInterval(() => {
-                if (state.inBattle === false) state.inBattle = true;
-                takeTurn();
-                if (!state.inBattle) { clearInterval(autoTimer); autoTimer = null; }
-            }, 800);
-        });
-
-        // Detail knop naar fighters
-        detailsModalEl.addEventListener('click', async (e) => {
-            const btnA = e.target.closest('#addToBattleA');
-            const btnB = e.target.closest('#addToBattleB');
-            if (btnA && currentDetailPokemon) { setFighter('A', currentDetailPokemon); }
-            if (btnB && currentDetailPokemon) { setFighter('B', currentDetailPokemon); }
-        });
-
-        // Berichten
-        function bericht(message) {
-            const id = 'bericht';
-            let b = document.getElementById(id);
-            if (!b) {
-                b = document.createElement('div');
-                b.id = id;
-                b.style.position = 'fixed';
-                b.style.right = '16px';
-                b.style.bottom = '16px';
-                b.style.zIndex = 1080;
-                document.body.appendChild(t);
-            }
-            const el = document.createElement('div');
-            el.className = 'bericht align-items-center show';
-            el.role = 'alert';
-            el.style.minWidth = '220px';
-            el.innerHTML = `
+        const el = document.createElement("div");
+        el.className = "bericht align-items-center show";
+        el.role = "alert";
+        el.style.minWidth = "220px";
+        el.innerHTML = `
         <div class="d-flex">
           <div class="bericht-body">${message}</div>
           <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="bericht"></button>
         </div>`;
-            b.appendChild(el);
-            setTimeout(() => el.remove(), 3000);
-        }
+        b.appendChild(el);
+        setTimeout(() => el.remove(), 3000);
+      }
     </script>
-</body>
-
+  </body>
 </html>

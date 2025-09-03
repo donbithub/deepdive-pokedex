@@ -1,6 +1,8 @@
-let StorageObj = {};
 const maxPokemon = 1025;
 const randomId = Math.floor(Math.random() * maxPokemon) + 1;
+
+const params = new URLSearchParams(window.location.search);
+const pokemonId = params.get("id") || randomId;
 
 const typeColorsBackground = {
   grass: "from-green-400 via-green-500 to-green-600",
@@ -23,10 +25,9 @@ const typeColorsBackground = {
   flying: "from-sky-400 via-sky-500 to-sky-600",
 };
 
-fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`)
+fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
   .then((response) => response.json())
   .then((data) => {
-    StorageObj = data;
     const parent = document.getElementById("typeBeat");
     createIDAndTypes(parent, data);
 
