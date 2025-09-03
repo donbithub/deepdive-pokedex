@@ -3,6 +3,15 @@ body {
   font-weight: 600;
 }
 
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden; /* prevent horizontal scroll */
+  margin: 0;
+  padding: 0;
+}
+
 .pokedex-header {
   width: 400px;
   padding: 1rem 2rem;
@@ -40,6 +49,15 @@ body {
   animation: flashBlue 1s infinite alternate;
 }
 
+@media screen and (min-width: 1535px) {
+  .pokedex-header::before {
+    top: 0.5rem;
+    left: 0.5rem;
+    width: 80px;
+    height: 80px;
+  }
+}
+
 @keyframes flashBlue {
   0% {
     filter: brightness(1);
@@ -50,7 +68,6 @@ body {
 }
 
 .pokedex-header .leds {
-  display: flex;
   gap: 4px;
 }
 
@@ -63,12 +80,17 @@ body {
 
 .pokedex-header .leds .red {
   background: radial-gradient(circle at 4px 4px, #f44336, #000);
+  animation: flashBlue 2s steps(2) infinite;
 }
 .pokedex-header .leds .yellow {
   background: radial-gradient(circle at 4px 4px, #ffeb3b, #000);
+  animation: flashBlue 2s steps(2) infinite;
+  animation-delay: 0.6s;
 }
 .pokedex-header .leds .green {
   background: radial-gradient(circle at 4px 4px, #4caf50, #000);
+  animation: flashBlue 2s steps(2) infinite;
+  animation-delay: 1.2s;
 }
 
 .card-right {
@@ -78,10 +100,25 @@ body {
   box-shadow: 0 4px 24px 0 #b3a12522;
   padding: 2rem 1.5rem;
   margin-bottom: 2rem;
-  font-family: "Inter", "Roboto", "Arial", "sans-serif";
   color: #181328;
   position: relative;
   overflow: hidden;
+  box-shadow: 2px 2px 0 #000, 4px 4px 0 #000, 6px 6px 0 #000;
+}
+
+.card-background {
+  background: linear-gradient(120deg, #fffbe6 0%, #f8efbd 100%);
+}
+
+.evolution-chain {
+  /* border: 2.5px solid #e1dbf1; */
+  border-radius: 1rem;
+}
+
+.imageBorder {
+  border: 2.5px solid #e1dbf1;
+  border-radius: 1rem;
+  box-shadow: 0 4px 24px 0 #b3a12522;
 }
 
 .card-right table {

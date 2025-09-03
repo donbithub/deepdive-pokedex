@@ -37,9 +37,7 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`)
 
     const leftCol = CreateElement(
       "div",
-      `col-span-6 flex flex-col bg-gradient-to-b ${
-        typeColorsBackground[data.types[0].type.name]
-      }`,
+      `col-span-12 sm:col-span-6 flex flex-col`,
       null,
       container
     );
@@ -47,42 +45,61 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`)
 
     CreateElement(
       "div",
-      "bg-red panel text-white font-bold text-2xl p-4 w-full [clip-path:polygon(0_0,100%_0,90%_100%,0_100%)]",
+      "bg-yellow panel text-black font-bold text-3xl 2xl:text-4xl p-4 w-full [clip-path:polygon(0_0,100%_0,90%_100%,0_100%)]",
       data.name.charAt(0).toUpperCase() + data.name.slice(1),
       leftBg
     );
 
     const div0 = CreateElement(
       "div",
-      "flex justify-center items-center bg-white z-auto m-4",
+      `flex justify-center items-center z-auto m-4 sm:m-4 sm:mr-2 lg:m-8 lg:mr-4 bg-white imageBorder`,
       null,
       leftBg
     );
 
-    const img = CreateElement("img", "max-w-full h-auto", null, div0);
+    const div1 = CreateElement(
+      "div",
+      `flex w-full justify-center items-center z-auto bg-white shadow-[2px_2px_0_#000,4px_4px_0_#000] imageBorder bg-gradient-to-b ${
+        typeColorsBackground[data.types[0].type.name]
+      }`,
+      null,
+      div0
+    );
+
+    const img = CreateElement(
+      "img",
+      `max-w-full z-auto x-auto h-auto`,
+      null,
+      div1
+    );
     img.src =
       data.sprites.other["official-artwork"].front_default ||
       data.sprites.front_default;
     img.alt = data.name;
 
-    const rightCol = CreateElement("div", "col-span-6", null, container);
+    const rightCol = CreateElement(
+      "div",
+      "col-span-12 sm:col-span-6",
+      null,
+      container
+    );
 
     const profileCard = CreateElement(
       "div",
-      "card-right m-4 p-4 rounded-lg shadow",
+      "card-right overflow-auto m-4 lg:m-8 lg:ml-4 p-4 rounded-lg shadow shadow-[2px_2px_0_#000,4px_4px_0_#000]",
       null,
       rightCol
     );
     CreateElement(
       "h2",
-      "text-2xl font-bold mb-4 text-center",
+      "text-2xl 2xl:text-3xl font-bold mb-4 text-center",
       "Profile",
       profileCard
     );
 
     const profileTable = CreateElement(
       "table",
-      "w-full table-auto text-left border-collapse",
+      "w-full table-auto font-bit text-sm text-left 2xl:text-3xl border-collapse",
       null,
       profileCard
     );
@@ -109,7 +126,7 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`)
           (data.weight / 10) * 2.205
         )} lbs)`,
       ],
-      ["Base Experience:", data.base_experience],
+      ["Base Exp.:", data.base_experience],
     ];
 
     profileData.forEach(([label, value]) => {
@@ -120,27 +137,27 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`)
 
     const statsCard = CreateElement(
       "div",
-      "p-4 m-4 bg-gray-100 card-right rounded-lg shadow",
+      "overflow-auto m-4 lg:m-8 lg:ml-4 p-4 bg-gray-100 card-right rounded-lg shadow shadow-[2px_2px_0_#000,4px_4px_0_#000]",
       null,
       rightCol
     );
     CreateElement(
       "h2",
-      "text-2xl font-bold mb-4 text-center",
+      "text-2xl 2xl:text-3xl font-bold mb-4 text-center",
       "Base Stats",
       statsCard
     );
 
     const statsTable = CreateElement(
       "table",
-      "w-full table-auto text-left border-collapse",
+      "w-full table-auto font-bit text-sm 2xl:text-3xl text-left border-collapse",
       null,
       statsCard
     );
     const statsHead = CreateElement("thead", null, null, statsTable);
     const headRow = CreateElement("tr", null, null, statsHead);
-    CreateElement("th", "px-2 py-1 border-b", "Stat", headRow);
-    CreateElement("th", "px-2 py-1 border-b", "Value", headRow);
+    // CreateElement("th", "px-2 py-1 border-b", "Stat", headRow);
+    // CreateElement("th", "px-2 py-1 border-b", "Value", headRow);
 
     const statsBody = CreateElement("tbody", null, null, statsTable);
     const statsData = [
@@ -157,6 +174,82 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`)
       CreateElement("td", "px-2 py-1", stat, row);
       CreateElement("td", "px-2 py-1", value, row);
     });
+
+    fetch(data.species.url)
+      .then((res) => res.json())
+      .then((speciesData) => fetch(speciesData.evolution_chain.url))
+      .then((res) => res.json())
+      .then(async (evolutionData) => {
+        if (evolutionData.chain.evolves_to.length === 0) return;
+
+        const getEvolutions = (node) => {
+          const result = [node.species.name];
+          node.evolves_to.forEach((evo) => {
+            result.push(...getEvolutions(evo));
+          });
+          return result;
+        };
+
+        const evolutionNames = getEvolutions(evolutionData.chain);
+
+        const evolutionDetails = await Promise.all(
+          evolutionNames.map((name) =>
+            fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
+              .then((res) => res.json())
+              .then((poke) => ({
+                name: poke.name,
+                sprite: poke.sprites.front_default,
+              }))
+          )
+        );
+
+        const evoContainer = CreateElement(
+          "div",
+          "evolution-chain overflow-auto m-4 mt-2 mb-1 sm:ml-4 lg:ml-8 lg:mr-4 sm:mb-8 flex flex-col justify-around shadow-[2px_2px_0_#000,4px_4px_0_#000]",
+          null,
+          leftCol
+        );
+
+        CreateElement(
+          "div",
+          "card-background rounded-t-[1rem] text-black font-bold text-2xl 2xl:text-3xl p-4 w-full",
+          "Evolutions",
+          evoContainer
+        );
+
+        const evoRowContainer = CreateElement(
+          "div",
+          "h-full flex justify-around pb-4 card-background rounded-b-[1rem]",
+          null,
+          evoContainer
+        );
+
+        evolutionDetails.forEach((evo, index) => {
+          const evoDiv = CreateElement(
+            "div",
+            "flex flex-col items-center",
+            null,
+            evoRowContainer
+          );
+          CreateElement("img", "w-32 h-32", null, evoDiv).src = evo.sprite;
+          CreateElement(
+            "span",
+            "text-sm 2xl:text-lg capitalize text-[0.625rem] font-bit",
+            evo.name,
+            evoDiv
+          );
+
+          if (index < evolutionDetails.length - 1) {
+            CreateElement(
+              "div",
+              "evo-arrow text-8xl mt-6",
+              "→",
+              evoRowContainer
+            );
+          }
+        });
+      })
+      .catch((err) => console.error("Evolution fetch error:", err));
   });
 
 function CreateElement(tag, className, innerHTML, parent) {
@@ -197,13 +290,23 @@ function createIDAndTypes(parent, pokemon) {
   );
 
   const labelsCol = CreateElement("div", "flex flex-col", null, container);
-  CreateElement("h2", "text-black", "ID:", labelsCol);
-  CreateElement("h2", "text-black", "TYPE:", labelsCol);
+  CreateElement(
+    "h2",
+    "text-black font-bit mb-2 text-[0.700rem] 2xl:text-sm mr-2 [@media(max-width:400px)]:hidden",
+    "ID:",
+    labelsCol
+  );
+  CreateElement(
+    "h2",
+    "text-black font-bit text-[0.700rem] 2xl:text-sm [@media(max-width:400px)]:hidden",
+    "TYPE:",
+    labelsCol
+  );
 
   const valuesCol1 = CreateElement("div", "flex flex-col", null, container);
   CreateElement(
     "h2",
-    "text-black type bg-gray-300 rounded pl-2 pr-2 mb-2 w-20",
+    "text-black 2xl:text-lg type bg-gray-300 rounded pl-2 pr-2 mb-2 w-20",
     `#${String(pokemon.id).padStart(4, "0")}`,
     valuesCol1
   );
@@ -211,18 +314,23 @@ function createIDAndTypes(parent, pokemon) {
   const type1 = pokemon.types[0].type.name;
   CreateElement(
     "h2",
-    `text-white type rounded pl-2 pr-2 ${typeColors[type1]}`,
+    `text-white 2xl:text-lg type rounded pl-2 pr-2 ${typeColors[type1]}`,
     type1.charAt(0).toUpperCase() + type1.slice(1),
     valuesCol1
   );
 
   if (pokemon.types[1]) {
-    const valuesCol2 = CreateElement("div", "flex flex-col", null, container);
-    CreateElement("h2", "text-yellow", ".", valuesCol2);
+    const valuesCol2 = CreateElement(
+      "div",
+      "flex flex-col mr-2 sm:m-0",
+      null,
+      container
+    );
+    CreateElement("h2", "text-yellow 2xl:text-lg pb-1", ".", valuesCol2);
     const type2 = pokemon.types[1].type.name;
     CreateElement(
       "h2",
-      `text-white type rounded pl-2 pr-2 mt-1 w-20 ${typeColors[type2]}`,
+      `text-white 2xl:text-lg type rounded pl-2 pr-2 mt-1 w-20 ${typeColors[type2]}`,
       type2.charAt(0).toUpperCase() + type2.slice(1),
       valuesCol2
     );

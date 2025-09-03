@@ -21,6 +21,8 @@
             },
             fontFamily: {
               pokedex: ["ITCKabelStdUltra", "sans-serif"],
+              pixel: ["PokemonGb-RAeo", "sans-serif"],
+              bit: ["PokemonClassic", "sans-serif"],
             },
           },
         },
@@ -33,23 +35,39 @@
         font-weight: normal;
         font-style: normal;
       }
+      @font-face {
+        font-family: "PokemonGb-RAeo";
+        src: url("./fonts/PokemonGb-RAeo.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "PokemonClassic";
+        src: url("./fonts/PokemonClassic.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }
     </style>
   </head>
 
   <body class="w-full">
-    <header class="w-full h-20 text-white text-center">
+    <header class="w-full h-20 2xl:h-[100px] text-white text-center">
       <div class="bg-red panel w-full absolute h-4"></div>
 
-      <div class="flex justify-start items-center h-20 -z-20 bg-yellow panel">
+      <div
+        class="flex justify-start items-center h-20 2xl:h-[100px] -z-20 bg-yellow panel"
+      >
         <div
-          class="pokedex-header panel2 h-20 w-[60%] z-10 bg-red text-white flex items-center justify-around"
+          class="pokedex-header panel2 h-20 2xl:h-[100px] w-[60%] z-10 bg-red text-white flex items-start sm:items-center justify-start sm:justify-center"
         >
-          <!-- <div class="leds absolute pl-4">
+          <div class="leds flex sm:hidden pl-12">
             <div class="red"></div>
             <div class="yellow"></div>
             <div class="green"></div>
-          </div> -->
-          <h1 class="font-pokedex text-4xl">Pokedex</h1>
+          </div>
+          <h1 class="font-pokedex text-4xl 2xl:text-5xl hidden sm:block">
+            Pokedex
+          </h1>
         </div>
 
         <div
