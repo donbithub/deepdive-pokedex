@@ -1,5 +1,21 @@
 # deepdive-pokedex
 
+## Reflectie & Leerpunten
+
+| **Verbeterpunten**             | **Goed gedaan**             | **Reflectie**                                                                 | **README aanvulling** |
+|--------------------------------|-----------------------------|-------------------------------------------------------------------------------|------------------------|
+| Taakverdeling                  | Goed gepresenteerd          | Don → Emre: Mooi JS geschreven                                                | Heldere taakverdeling verbeteren voor efficiëntie. |
+| GitHub                         | Unieke design               | Adam → Yasin: Integratie API                                                  | Beter gebruik van GitHub voor versiebeheer en samenwerking. |
+| Communicatie                   | Goed tempo                  | Emre → Efe: Initiatief taakverdeling                                          | Meer structuur in communicatie aanbrengen. |
+| Scrum (Stand-ups)              | Goede voorbereiding         | Efe → Don: Detail pagina creatief                                             | Dagelijkse korte stand-ups invoeren. |
+| Frameworks afstemmen           | Iedereen aanwezig           | Yasin → Adam: Mooi design                                                     | Frameworks beter vooraf afstemmen. |
+| Site cohesie                   | Goede samenwerking          | Efe → Emre: Leesbare code                                                     | Meer aandacht aan siteconsistentie. |
+| JavaScript samenwerking        | Responsive site             | Don → Efe: Goeie planning                                                     | Samenwerking in JS verbeteren. |
+| Presentatie voorbereiden        | Battle Arena (extra)        | Adam → Don: Goed zelfstandig gewerkt                                          | Presentaties beter voorbereiden. |
+| Code opmaak (Linter issues)    | PokeAPI goed benut          | Don → Yasin: Initiatief genomen                                               | Strikte lintingregels toepassen. |
+| API samenwerking               | Website logistiek           | Emre → Adam: Leesbare HTML <br> Adam → Efe: Samenwerking index                | API-integratie verder verbeteren. |
+
+
 # deepdive-detailspage
 
 | User Story                                                                                                                                                | Priority | Estimated Time |
