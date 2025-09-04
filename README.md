@@ -9,6 +9,106 @@
 | As a user I want the details page to be responsive so I can view it comfortably on mobile, tablet, or desktop.                                            | Medium   | 2 hours        |
 | As a user I want the details page to load smoothly with loading indicators.                                                                               | Low      | 1 hour         |
 
-| Tijd      | Di 9-11         | Di 11-13        | Di 13-15        | Di 15-17        | Wo 9-11         | Wo 11-13        | Wo 13-14 | Wo 15-17       | Do 9-11        | Do 11-13       | Do 13-15       | Do 15-17                        |
-| --------- | --------------- | --------------- | --------------- | --------------- | --------------- | --------------- | -------- | -------------- | -------------- | -------------- | -------------- | ------------------------------- |
-| Persoon 1 | Story 1 (H,10h) | Story 1 (H,10h) | Story 1 (H,10h) | Story 1 (H,10h) | Story 1 (H,10h) | Story 1 (H,10h) | Story 1  | Story 2 (M,2h) | Story 3 (H,3h) | Story 3 (H,3h) | Story 4 (M,3h) | Story 5 (M,2h) + Story 6 (L,1h) |
+| Tijd | Di 9-11         | Di 11-13        | Di 13-15        | Di 15-17        | Wo 9-11         | Wo 11-13        | Wo 13-14 | Wo 15-17       | Do 9-11        | Do 11-13       | Do 13-15       | Do 15-17                        |
+| ---- | --------------- | --------------- | --------------- | --------------- | --------------- | --------------- | -------- | -------------- | -------------- | -------------- | -------------- | ------------------------------- |
+| Don  | Story 1 (H,10h) | Story 1 (H,10h) | Story 1 (H,10h) | Story 1 (H,10h) | Story 1 (H,10h) | Story 1 (H,10h) | Story 1  | Story 2 (M,2h) | Story 3 (H,3h) | Story 3 (H,3h) | Story 4 (M,3h) | Story 5 (M,2h) + Story 6 (L,1h) |
+
+# Tasks
+
+### Story 1: _Visually appealing Pokédex details page_ (High, 10h)
+
+- [x] **All tasks finished for Story 1**
+
+- [x] Design overall layout (grid: image vs. data panel)
+
+- [x] Implement Pokedex red “framing” border style
+
+- [x] Add background behind Pokémon image matching type color
+
+- [x] Add title panel (name with angled clipped background)
+
+- [x] Apply consistent typography (headings, table text, etc.)
+
+- [x] Style buttons and type badges (old school / 8-bit)
+
+- [x] Add shadows and subtle effects (book-like appearance)
+
+- [x] Polish color scheme to match Pokédex aesthetic
+
+- [x] Fix padding & responsiveness
+
+---
+
+### Story 2: _Pokémon statistics easy to read & structured_ (Medium, 2h)
+
+- [x] **All tasks finished for Story 2**
+
+- [x] Create Profile table (species, abilities, gender ratio, etc.)
+
+- [x] Create Base Stats table (HP, Attack, etc.)
+
+- [x] Ensure table uses spacing, borders, and bold headings
+
+- [x] Test readability on mobile/desktop
+
+---
+
+### Story 3: _Data displayed in timely manner_ (High, 3h)
+
+- [ ] **All tasks finished for Story 3**
+
+- [x] Fetch random Pokémon from PokéAPI
+
+- [x] Populate name, ID, and sprite dynamically
+
+- [x] Populate types (with color-coded badges)
+
+- [x] Populate profile table with API data
+
+- [x] Populate base stats table with API data
+
+- [ ] Show weaknesses (via type relations endpoint)
+
+- [x] Show evolutions (via evolution chain endpoint)
+
+---
+
+### Story 4: _Quickly switch between Pokémon_ (Medium, 3h)
+
+- **All tasks finished for Story 4**
+
+- [x] Add “Next” and “Previous” buttons under Pokémon details
+
+- [x] Update fetch logic to move between Pokémon IDs
+
+- [ ] Ensure data refreshes without reloading page
+
+- [x] Animate transitions between Pokémon
+
+---
+
+### Story 5: _Responsive details page_ (Medium, 2h)
+
+- [x] **All tasks finished for Story 5**
+
+- [x] Implement responsive grid (`col-span-x` for breakpoints)
+
+- [x] Stack panels on mobile, side-by-side on desktop
+
+- [x] Test on different screen sizes
+
+- [x] Adjust font sizes per breakpoint
+
+- [x] Adjust spacing per breakpoint
+
+---
+
+### Story 6: _Smooth loading with indicators_ (Low, 1h)
+
+- [ ] **All tasks finished for Story 6**
+
+- [x] Add loading spinner or Pokéball animation
+
+- [ ] Show loading state while fetching data
+
+- [ ] Hide loading state when data is ready

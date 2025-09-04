@@ -50,38 +50,138 @@
     </style>
   </head>
 
-  <body class="w-full">
-    <header class="w-full h-20 2xl:h-[100px] text-white text-center">
-      <div class="bg-red panel w-full absolute h-4"></div>
+  <body class="w-full h-screen">
+    <div
+      id="pokeball-spinner"
+      class="fixed inset-0 z-[999] flex items-center justify-center bg-black bg-opacity-40"
+    >
+      <img
+        src="images/pokeball.png"
+        alt="Loading..."
+        class="w-32 h-32 animate-spin"
+        draggable="false"
+      />
+    </div>
+
+  <header class="w-full h-20 2xl:h-[100px] text-white text-center">
+    <div class="bg-red panel w-full absolute h-4"></div>
+
+    <div
+      class="flex justify-start items-center h-20 2xl:h-[100px] -z-20 bg-yellow panel"
+    >
+      <div
+        class="pokedex-header panel2 h-20 2xl:h-[100px] w-[60%] z-10 bg-red text-white flex items-start sm:items-center justify-start sm:justify-center"
+      >
+        <div class="leds flex sm:hidden pl-12">
+          <div class="red"></div>
+          <div class="yellow"></div>
+          <div class="green"></div>
+        </div>
+        <h1 class="font-pokedex text-4xl 2xl:text-5xl hidden sm:block">
+          Pokedex
+        </h1>
+      </div>
 
       <div
-        class="flex justify-start items-center h-20 2xl:h-[100px] -z-20 bg-yellow panel"
-      >
-        <div
-          class="pokedex-header panel2 h-20 2xl:h-[100px] w-[60%] z-10 bg-red text-white flex items-start sm:items-center justify-start sm:justify-center"
-        >
-          <div class="leds flex sm:hidden pl-12">
-            <div class="red"></div>
-            <div class="yellow"></div>
-            <div class="green"></div>
+        id="typeBeat"
+        class="flex justify-center text-left items-center gap-3 pt-3"
+      ></div>
+    </div>
+  </header>
+
+  <main>
+    <section
+      id="pokemon-details"
+      class="frame grid grid-cols-12 items-stretch bg-redtwo"
+    ></section>
+  </main>
+
+  <div
+    class="bg-redtwo h-full flex flex-col justify-start items-center p-4 pt-0 lg:p-8"
+  >
+  <section
+    class="flex flex-col relative justify-center items-center bg-gray-100 w-full rounded-[1rem]
+    shadow-[6px_6px_0_#000,12px_12px_0_#000,inset_-4px_-4px_8px_rgba(0,0,0,0.8),inset_4px_4px_8px_rgba(0,0,0,0.6)]
+"
+  >
+  <div class="absolute top-2 left-2 w-4 h-4 rounded-full bg-gray-500 border-2 border-black shadow-inner"></div>
+  <div class="absolute top-2 right-2 w-4 h-4 rounded-full bg-gray-500 border-2 border-black shadow-inner"></div>
+  <div class="absolute bottom-2 left-2 w-4 h-4 rounded-full bg-gray-500 border-2 border-black shadow-inner"></div>
+  <div class="absolute bottom-2 right-2 w-4 h-4 rounded-full bg-gray-500 border-2 border-black shadow-inner"></div>
+
+      <div class="flex mt-6 sm:mt-12 items-center justify-around gap-2 w-full">
+        <div class="flex flex-col w-full justify-center items-center">
+          <div class="flex justify-between gap-4 mb-2 mt-2 lg:mt-0 w-[95%] sm:w-4/5">
+            <button
+              class="redbutton border-2 border-black rounded-lg w-24 h-4 shadow hover:bg-red-600 transition"
+            ></button>
+            <button
+              class="greenbutton border-2 border-black rounded-lg w-24 h-4 shadow hover:bg-green-600 transition"
+            ></button>
           </div>
-          <h1 class="font-pokedex text-4xl 2xl:text-5xl hidden sm:block">
-            Pokedex
-          </h1>
+          <div
+            class="bg-gray-900 border-4 text-center border-black rounded-lg w-[95%] sm:w-4/5 aspect-[4/1] flex items-center justify-center text-green-300 font-mono text-xs shadow-inner"
+          >
+            <span
+              id="mini-screen-text"
+              class="sm:text-lg md:text-xl lg:text-2xl xl:text-3xl"
+              >Welcome to your Pokedex! <br />
+              Press the Home button to go back to the index. <br />
+              Press the B button to go to the previous Pokémon. <br />
+              Press the A button to go to the next Pokémon.
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="set p-4 sm:p-8 flex w-[95%] sm:w-4/5 justify-between items-center [@media(max-width:375px)]:justify-center"
+      >
+        <nav class="d-pad [@media(max-width:375px)]:hidden">
+          <a class="up" href="#"></a>
+          <a class="right" href="#"></a>
+          <a class="down" href="#"></a>
+          <a class="left" href="#"></a>
+        </nav>
+
+        <div class="hidden sm:flex flex-col gap-2">
+          <div class="h-1 w-24 bg-gray-700 rounded shadow-inner"></div>
+          <div class="h-1 w-24 bg-gray-700 rounded shadow-inner"></div>
+          <div class="h-1 w-24 bg-gray-700 rounded shadow-inner"></div>
+          <div class="h-1 w-24 bg-gray-700 rounded shadow-inner"></div>
+          <div class="h-1 w-24 bg-gray-700 rounded shadow-inner"></div>
         </div>
 
-        <div
-          id="typeBeat"
-          class="flex justify-center text-left items-center gap-3 pt-3"
-        ></div>
+        <div class="ab-buttons border-2 border-black rounded-full bg-gray-300 shadow-[inset_2px_2px_4px_rgba(0,0,0,0.5)] p-4 flex gap-4 items-center">
+          <button id="btn-a" class="btn-a">A</button>
+          <button id="btn-a" class="btn-b">B</button>
+        </div>
       </div>
-    </header>
+    </section>
+  </div>
 
-    <main>
-      <section
-        id="pokemon-details"
-        class="frame text-center grid grid-cols-12 bg-redtwo"
-      ></section>
-    </main>
-  </body>
+  <button
+    onclick="window.location.href='index.html'"
+    class="fixed bottom-4 left-4 z-50 bg-yellow border-2 border-black shadow-[2px_2px_0_#000,4px_4px_0_#b3a125] hover:bg-redtwo hover:text-white transition-all duration-200 rounded-lg px-4 py-2 flex items-center gap-2 font-pokedex text-lg"
+    aria-label="Back to index"
+    style="
+      font-family: 'ITCKabelStdUltra', 'sans-serif';
+      letter-spacing: 0.05em;
+    "
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="w-5 h-5 mr-1"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M15 19l-7-7 7-7"
+      />
+    </svg>
+    Home
+  </button>
 </html>

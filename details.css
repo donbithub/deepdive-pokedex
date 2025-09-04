@@ -93,6 +93,18 @@ body {
   animation-delay: 1.2s;
 }
 
+.redbutton {
+  background: linear-gradient(90deg, #f44336 0%, #b71c1c 100%);
+  animation: flashBlue 2s steps(2) infinite;
+  animation-delay: 0.6s;
+}
+
+.greenbutton {
+  background: linear-gradient(90deg, #4caf50 0%, #388e3c 100%);
+  animation: flashBlue 2s steps(2) infinite;
+  animation-delay: 1.2s;
+}
+
 .card-right {
   background: linear-gradient(120deg, #fffbe6 0%, #f8efbd 100%);
   border: 2.5px solid #e1dbf1;
@@ -176,4 +188,209 @@ body {
 
 .type:hover {
   transform: translateY(1px);
+}
+
+/* dpad */
+.set {
+  overflow: hidden;
+  text-align: center;
+}
+
+.d-pad {
+  position: relative;
+  width: 125px;
+  height: 125px;
+  border-radius: 48%;
+  overflow: hidden;
+}
+.d-pad:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 5%;
+  transform: translate(-50%, -50%);
+  width: 66.6%;
+  height: 66.6%;
+  background: #111; /* black */
+}
+.d-pad:after {
+  content: "";
+  position: absolute;
+  display: none;
+  z-index: 2;
+  width: 20%;
+  height: 20%;
+  top: 50%;
+  left: 50%;
+  background: #111; /* black */
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.25s;
+  cursor: pointer;
+}
+.d-pad:hover:after {
+  width: 30%;
+  height: 30%;
+}
+.d-pad a {
+  display: block;
+  position: absolute;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  width: 33.3%;
+  height: 43%;
+  background: #111; /* black */
+  text-align: center;
+}
+.d-pad a:hover {
+  background: #222; /* dark gray */
+}
+.d-pad a:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-radius: 5px;
+  border-style: solid;
+  transition: all 0.25s;
+}
+.d-pad a:after {
+  content: "";
+  position: absolute;
+  width: 102%;
+  height: 78%;
+  background: #000; /* pure black */
+  border-radius: 20%;
+}
+
+/* left + right arms */
+.d-pad a.left,
+.d-pad a.right {
+  width: 43%;
+  height: 33%;
+}
+.d-pad a.left:after,
+.d-pad a.right:after {
+  width: 78%;
+  height: 102%;
+}
+
+/* UP */
+.d-pad a.up {
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  border-radius: 17% 17% 50% 50%;
+}
+.d-pad a.up:after {
+  left: 0;
+  top: 0;
+  transform: translate(-100%, 0);
+  border-top-left-radius: 50%;
+  pointer-events: none;
+}
+.d-pad a.up:before {
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-width: 0 13px 19px 13px;
+  border-color: transparent transparent #666 transparent; /* gray arrow */
+}
+
+/* DOWN */
+.d-pad a.down {
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  border-radius: 50% 50% 17% 17%;
+}
+.d-pad a.down:after {
+  right: 0;
+  bottom: 0;
+  transform: translate(100%, 0);
+  border-bottom-right-radius: 50%;
+  pointer-events: none;
+}
+.d-pad a.down:before {
+  bottom: 40%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  border-width: 19px 13px 0 13px;
+  border-color: #666 transparent transparent transparent;
+}
+
+/* LEFT */
+.d-pad a.left {
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
+  border-radius: 17% 50% 50% 17%;
+}
+.d-pad a.left:after {
+  left: 0;
+  bottom: 0;
+  transform: translate(0, 100%);
+  border-bottom-left-radius: 50%;
+  pointer-events: none;
+}
+.d-pad a.left:before {
+  left: 40%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-width: 13px 19px 13px 0;
+  border-color: transparent #666 transparent transparent;
+}
+
+/* RIGHT */
+.d-pad a.right {
+  top: 50%;
+  right: 0;
+  transform: translate(0, -50%);
+  border-radius: 50% 17% 17% 50%;
+}
+.d-pad a.right:after {
+  right: 0;
+  top: 0;
+  transform: translate(0, -100%);
+  border-top-right-radius: 50%;
+  pointer-events: none;
+}
+.d-pad a.right:before {
+  right: 40%;
+  top: 50%;
+  transform: translate(50%, -50%);
+  border-width: 13px 0 13px 19px;
+  border-color: transparent transparent transparent #666;
+}
+
+/* ab buttons */
+.ab-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.ab-buttons button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  background: #111;
+  color: #eee;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px #000;
+  box-shadow: inset 2px 2px 3px #000, inset -2px -2px 3px #333;
+  transition: background 0.2s, transform 0.1s;
+  cursor: pointer;
+}
+
+.ab-buttons button:hover {
+  background: #222;
+}
+
+.ab-buttons button:active {
+  background: #000;
+  transform: scale(0.9);
 }

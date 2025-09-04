@@ -1,3 +1,5 @@
+showSpinner();
+
 const maxPokemon = 1025;
 const randomId = Math.floor(Math.random() * maxPokemon) + 1;
 
@@ -38,7 +40,7 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
 
     const leftCol = CreateElement(
       "div",
-      `col-span-12 sm:col-span-6 flex flex-col`,
+      `col-span-12 sm:col-span-6 flex flex-col h-full`,
       null,
       container
     );
@@ -69,7 +71,7 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
 
     const img = CreateElement(
       "img",
-      `max-w-full z-auto x-auto h-auto`,
+      `max-h-[500px] w-auto object-contain mx-auto`,
       null,
       div1
     );
@@ -80,14 +82,14 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
 
     const rightCol = CreateElement(
       "div",
-      "col-span-12 sm:col-span-6",
+      "col-span-12 sm:col-span-6 flex flex-col h-full",
       null,
       container
     );
 
     const profileCard = CreateElement(
       "div",
-      "card-right overflow-auto m-4 lg:m-8 lg:ml-4 p-4 rounded-lg shadow shadow-[2px_2px_0_#000,4px_4px_0_#000]",
+      "card-right overflow-auto m-4 lg:m-8 lg:ml-4 lg:mb-0 p-4 rounded-lg shadow shadow-[2px_2px_0_#000,4px_4px_0_#000]",
       null,
       rightCol
     );
@@ -138,7 +140,7 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
 
     const statsCard = CreateElement(
       "div",
-      "overflow-auto m-4 lg:m-8 lg:ml-4 p-4 bg-gray-100 card-right rounded-lg shadow shadow-[2px_2px_0_#000,4px_4px_0_#000]",
+      "overflow-auto m-4 mt-0 lg:m-8 lg:ml-4 p-4 bg-gray-100 card-right rounded-lg shadow shadow-[2px_2px_0_#000,4px_4px_0_#000]",
       null,
       rightCol
     );
@@ -198,6 +200,7 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
             fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
               .then((res) => res.json())
               .then((poke) => ({
+                id: poke.id,
                 name: poke.name,
                 sprite: poke.sprites.front_default,
               }))
@@ -206,21 +209,21 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
 
         const evoContainer = CreateElement(
           "div",
-          "evolution-chain overflow-auto m-4 mt-2 mb-1 sm:ml-4 lg:ml-8 lg:mr-4 sm:mb-8 flex flex-col justify-around shadow-[2px_2px_0_#000,4px_4px_0_#000]",
+          "evolution-chain overflow-auto m-4 mt-0 mb-1 sm:ml-4 lg:ml-8 lg:mr-4 sm:mb-8 lg:-mb-0 flex flex-col justify-around shadow-[2px_2px_0_#000,4px_4px_0_#000]",
           null,
           leftCol
         );
 
         CreateElement(
           "div",
-          "card-background rounded-t-[1rem] text-black font-bold text-2xl 2xl:text-3xl p-4 w-full",
+          "card-background rounded-t-[1rem] text-black text-center font-bold text-2xl 2xl:text-3xl p-4 w-full",
           "Evolutions",
           evoContainer
         );
 
         const evoRowContainer = CreateElement(
           "div",
-          "h-full pl-2 pr-2 flex justify-around pb-4 card-background rounded-b-[1rem]",
+          "h-full overflow-auto pl-2 pr-2 flex justify-around pb-4 card-background rounded-b-[1rem]",
           null,
           evoContainer
         );
@@ -232,7 +235,17 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
             null,
             evoRowContainer
           );
-          CreateElement("img", "w-32 h-32", null, evoDiv).src = evo.sprite;
+
+          const evoLink = CreateElement("a", "", null, evoDiv);
+          evoLink.href = `details.html?id=${evo.id}`;
+
+          CreateElement(
+            "img",
+            "w-32 h-32 cursor-pointer hover:scale-105 transition",
+            null,
+            evoLink
+          ).src = evo.sprite;
+
           CreateElement(
             "span",
             "text-sm 2xl:text-lg capitalize text-[0.625rem] font-bit",
@@ -249,9 +262,43 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
             );
           }
         });
+        hideSpinner();
       })
       .catch((err) => console.error("Evolution fetch error:", err));
+    hideSpinner();
   });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const btnA = document.getElementById("btn-a");
+  const btnB = document.querySelector(".btn-b");
+
+  btnA.addEventListener("click", () => {
+    let nextId = Number(pokemonId) + 1;
+    if (nextId <= maxPokemon) {
+      showSpinner();
+      setTimeout(() => {
+        window.location.href = `details.html?id=${nextId}`;
+      }, 400); // short delay for effect
+    }
+  });
+
+  btnB.addEventListener("click", () => {
+    let prevId = Number(pokemonId) - 1;
+    if (prevId >= 1) {
+      showSpinner();
+      setTimeout(() => {
+        window.location.href = `details.html?id=${prevId}`;
+      }, 400);
+    }
+  });
+});
+
+function showSpinner() {
+  document.getElementById("pokeball-spinner").classList.remove("hidden");
+}
+function hideSpinner() {
+  document.getElementById("pokeball-spinner").classList.add("hidden");
+}
 
 function CreateElement(tag, className, innerHTML, parent) {
   const element = document.createElement(tag);
