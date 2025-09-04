@@ -2,8 +2,6 @@
 
 # deepdive-detailspage
 
-# deepdive-pokedex
-
 | User Story                                                                                                                                                | Priority | Estimated Time |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------- |
 | As a user I want a visually appealing Pokédex details page.                                                                                               | High     | 10 hours       |
